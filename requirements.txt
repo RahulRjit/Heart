@@ -1,0 +1,10 @@
+Flask
+Gunicorn
+mysql
+mysql-connector
+flask-mail
+pickle
+pandas
+matplotlib
+seaborn
+scikit-learn
