@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FitHeart</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="../static/img1/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib1/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../static/lib1/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css1/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../static/css1/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar  navbar-light" style="background-color: #62d2a2;">
+                <a href="/user_pannel" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary">FitHeart</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="../static/img1/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <span>Hello {{ user[1]}}</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/user_pannel" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/feed" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                    <a href="/history" class="nav-item nav-link"><i class="fa fa-table me-2"></i>History</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand  navbar-light sticky-top px-4 py-0" style="background-color: #a5d7c6;">
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <div class="navbar-nav align-items-center ms-auto">
+              
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="../static/img1/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">{{ user[1]}}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="/logout" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                           
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Heart Attack Prediction</h1>
+                </div>
+          
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="container">
+                       
+                        <form method="POST" action="/prediction">
+                          <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="text" class="form-control" id="age" name="age" required placeholder="Your age..">
+                          </div>
+                          <div class="form-group">
+                            <label for="sex">Sex:</label>
+                            <select class="form-control" id="sex" name="sex" required>
+                              <option value="">Choose...</option>
+                              <option value="0">Female</option>
+                              <option value="1">Male</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="cp">Chest Pain Type:</label>
+                            <select class="form-control" id="cp" name="cp" required>
+                              <option value="">Choose...</option>
+                              <option value="0">Typical angina</option>
+                              <option value="1">Atypical angina</option>
+                              <option value="2">Non-anginal pain</option>
+                              <option value="3">Asymptomatic</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="trestbps">Resting Blood Pressure:</label>
+                            <input type="text" class="form-control" id="trestbps" name="trestbps" required placeholder="A number in range [94-200] mmHg">
+                          </div>
+                          <div class="form-group">
+                            <label for="chol">Cholesterol Level:</label>
+                            <input type="text" class="form-control" id="chol" name="chol" placeholder="A number in range [126-564] mg/dl" required >
+                          </div>
+                          <div class="form-group">
+                            <label for="fbs">Fasting Blood Sugar:</label>
+                            <select class="form-control" id="fbs" name="fbs" required>
+                              <option value="">Choose...</option>
+                              <option value="0">Lower than 120 mg/dl</option>
+                              <option value="1">Greater than or equal to 120 mg/dl</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="restecg">Resting Electrocardiographic Results:</label>
+                            <select class="form-control" id="restecg" name="restecg" required>
+                              <option value="">Choose...</option>
+                              <option value="0">Normal</option>
+                              <option value="1">ST-T wave abnormality</option>
+                              <option value="2">Probable or definite left ventricular hypertrophy</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="thalach">Maximum Heart Rate Achieved:</label>
+                            <input type="text" class="form-control" id="thalach" name="thalach" placeholder="A number in range [71-202] bpm" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="exang">Exercise Induced Angina:</label>
+                            <select class="form-control" id="exang" name="exang" required>
+                              <option value="">Choose...</option>
+                              <option value="0">No</option>
+                              <option value="1">Yes</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest:</label>
+                            <input type="text" class="form-control" id="thalach" name="oldpeak" placeholder="ST depression, typically in [0-6.2]" required>
+                            </div>
+    
+                            <div class="form-group">
+                            <label for="slope">slope of the peak exercise ST segment</label>
+            <select id="slope" name="slope" class="form-control" required>
+              <option selected>----select option----</option>
+              <option value="0">Upsloping</option>
+              <option value="1">Flat</option>
+              <option value="2">Downsloping</option>
+            </select>
+            </div>
+            
+     <div class="form-group">
+            <label for="ca">Number of Major vessels</label>
+            <input type="text" id="ca" name="ca" placeholder="Typically in [0-4]" class="form-control">
+            </div>
+                              
+    
+    <div class="form-group">
+            <label for="thal">Thalassemia</label> 
+            <select id="thal" name="thal" class="form-control">
+              <option selected>----select option----</option>
+              <option value="0">Normal</option>
+              <option value="1">Fixed Defect</option> 
+              <option value="2">Reversible Defect</option>  
+            </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+    
+                      
+                      
+                  </div>
+                  <div class="col-md-6">
+                    <!-- Add content for the second column here -->
+                  </div>
+                </div>
+          
+              </main>
+            
+
+
+           
+
+
+
+    
+
+
+         
+            
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">FitHeart</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By <a href="">Rahul Pal</a>
+                        </br>
+                        Distributed By <a class="border-bottom" href="" target="_blank">Rahul Pal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../static/lib1/chart/chart.min.js"></script> -->
+    <script src="../static/lib1/easing/easing.min.js"></script>
+    <script src="../static/lib1/waypoints/waypoints.min.js"></script>
+    <script src="../static/lib1/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../static/lib1/tempusdominus/js/moment.min.js"></script>
+    <script src="../static/lib1/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../static/lib1/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js1/main.js"></script>
+
+
+   
+   
+   
+   
+</body>
+
+</html>
