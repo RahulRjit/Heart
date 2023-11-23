@@ -1,13 +1,14 @@
 from flask import Flask,render_template,request,session, redirect
 import mysql.connector
 import numpy as np
-import pickle
+import pickle 
 import datetime
 from flask_mail import Mail, Message
 
 
 
-filename = 'heart-prediction-model.pkl'
+
+filename = 'heart-disease-prediction-knn-model.pkl'
 model=pickle.load(open(filename, 'rb'))
 
 
@@ -129,22 +130,22 @@ def useer():
     return render_template("index1.html" ,user=user)
 
 @app.route("/prediction",methods=["post"])
-def model():
+def modl():
     if request.method=="POST":
-        cdate=datetime.date.today()
+        cdate=str(datetime.date.today())
         age=int(request.form['age'])
-        sex=request.form.get('sex')
-        cp=request.form.get('cp')
+        sex=int(request.form.get('sex'))
+        cp=int(request.form.get('cp'))
         trestbps=int(request.form['trestbps'])
         chol=int(request.form['chol'])
-        fbs=request.form.get('fbs')
-        restecg=request.form.get('restecg')
+        fbs=int(request.form.get('fbs'))
+        restecg=int(request.form.get('restecg'))
         thalach=int(request.form['thalach'])
-        exang=request.form.get('exang')
+        exang=int(request.form.get('exang'))
         oldpeak=float(request.form['oldpeak'])
-        slope=request.form.get('slope')
+        slope=int(request.form.get('slope'))
         ca=int(request.form['ca'])
-        thal=request.form.get('thal')
+        thal=int(request.form.get('thal'))
 
 
         data=np.array([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
@@ -154,9 +155,9 @@ def model():
             res="Normal"
         else:
             res="Heart Issue"
-        con=mysql.connector.connect(host='loaclhost',user='root',database='heart',password='Rahul@123')
+        con=mysql.connector.connect(host='localhost',user='root',database='heart',password='Rahul@123')
         cur=con.cursor()
-        cur.execute("insert into heart_attack_data(date_created,age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,user,result) values('"+cdate+"','"+age+"','"+sex+"','"+cp+"','"+trestbps+"','"+chol+"','"+fbs+"','"+restecg+"','"+thalach+"','"+exang+"','"+oldpeak+"','"+slope+"','"+ca+"','"+thal+"','"+session["username"]+"','"+res+"')")
+        cur.execute("insert into heart_attack_data(date_created,age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,user,result) values('"+cdate+"','"+str(age)+"','"+str(sex)+"','"+str(cp)+"','"+str(trestbps)+"','"+str(chol)+"','"+str(fbs)+"','"+str(restecg)+"','"+str(thalach)+"','"+str(exang)+"','"+str(oldpeak)+"','"+str(slope)+"','"+str(ca)+"','"+str(thal)+"','"+str(session["username"])+"','"+str(res)+"')")
         con.commit()
         cur.close()
 
@@ -196,18 +197,19 @@ def fdb():
     return render_template('form.html')
 @app.route("/feedback",methods=["post"])
 def feedback():
-    if request.form=="POST":
+   
 
-        name=request.form['name']
-        email=request.form['email']
-        rating=request.form['rating']
-        comments= request.form['comments']
-        con=mysql.connector.connect(host='localhost',user='root',database='heart',password='Rahul@123')
-        cur=con.cursor()
-        cur.execute("insert into feedback(name,email,rating,comments) values('"+name+"','"+email+"','"+rating+"','"+comments+"')")
-        con.commit()
+    name=request.form['nam']
+    email=request.form['emal']
+    rating=request.form['rag']
+    comments= request.form['com']
+    con=mysql.connector.connect(host='localhost',user='root',database='heart',password='Rahul@123')
+    cur=con.cursor()
+    cur.execute("insert into feedback(name,email,rating,comments) values('"+name+"','"+email+"','"+rating+"','"+comments+"')")
+    con.commit()
 
-        return render_template('form.html')
+     
+    return render_template('form.html')
         
 
     
